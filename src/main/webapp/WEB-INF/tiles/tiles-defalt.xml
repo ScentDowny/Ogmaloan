@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+ 
+	<!-- 기본 레이아웃 -->	
+	<definition name="basic_layout" template="/WEB-INF/jsp/tiles_layout/baseLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/tiles_views/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/tiles_views/footer.jsp" />
+	</definition>
+	
+	<!-- 테스트 레이아웃 -->
+	<definition name="test_layout" template="/WEB-INF/jsp/tiles_layout/testLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/tiles_views/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/tiles_views/footer.jsp" />
+	</definition>
+	
+	
+</tiles-definitions>
