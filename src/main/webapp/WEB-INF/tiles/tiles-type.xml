@@ -8,10 +8,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/main/main.jsp" />
 	</definition>
 	
-	<!-- 테스트 용도 -->
-	<definition name="test/*" extends="test_layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/test/{1}.jsp" />
+	<!-- 메인 외 기타 페이지 -->
+	<definition name="character/*/*" extends="basic_layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/character/{1}/{2}.jsp" />
 	</definition>
+	
 	
 	
 </tiles-definitions>
