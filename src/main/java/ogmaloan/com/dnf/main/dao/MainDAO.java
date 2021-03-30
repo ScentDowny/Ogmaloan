@@ -8,8 +8,4 @@ import ogmaloan.com.dnf.cmm.dao.AbstractDAO;
 @Repository("MainDAO")
 public class MainDAO extends AbstractDAO {
 	
-	public void insertTest() {
-		insert("test.insertTest");
-	}
-	
 }
