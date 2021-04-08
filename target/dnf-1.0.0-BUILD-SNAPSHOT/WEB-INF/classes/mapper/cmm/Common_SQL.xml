@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common">
+
+	<!-- 서버 정보 등록 -->
+	<insert id="insertServerList" parameterType="ogmaloan.com.dnf.cmm.vo.ServerVO">
+		/* QueryId : common.insertServerList */
+		INSERT INTO SERVER_MASTER
+			(
+				SERVER_ID
+			  , SERVER_NAME
+			)
+		VALUES
+			(
+				#{serverId}
+			  , #{serverName}
+			)
+		ON DUPLICATE KEY UPDATE
+			SERVER_NAME = #{serverName}
+	</insert>
+	
+	<!-- 서버 리스트 조회 -->
+	<select id="selectServerList" resultType="ogmaloan.com.dnf.cmm.vo.ServerVO">
+		/* QueryId : common.selectServerList */
+		SELECT SERVER_ID
+			 , SERVER_NAME
+		  FROM SERVER_MASTER
+	</select>
+	
+</mapper>

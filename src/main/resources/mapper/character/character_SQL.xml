@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="character">
+
+	<!-- 서버 정보 등록 -->
+	<insert id="insertCharacterLists" parameterType="ogmaloan.com.dnf.cmm.vo.CharacterVO">
+		/* QueryId : character.insertCharacterLists */
+		INSERT INTO CHARACTER_MASTER
+		(
+			CHARACTER_ID
+		  , CHARACTER_NAME
+		  , SERVER_ID
+		  , LEVEL
+		  , JOB_ID
+		  , JOB_GROW_ID
+		  , JOB_NAME
+		  , JOB_GROW_NAME
+		)
+		VALUES
+		(
+			#{characterId}
+		  , #{characterName}
+		  , #{serverId}
+		  , #{level}
+		  , #{jobId}
+		  , #{jobGrowId}
+		  , #{jobName}
+		  , #{jobGrowName}
+		)
+		ON DUPLICATE KEY UPDATE
+			CHARACTER_NAME = #{characterName}
+		  , SERVER_ID = #{serverId}
+		  , LEVEL = #{level}
+		  , JOB_ID = #{jobId}
+		  , JOB_GROW_ID = #{jobGrowId}
+		  , JOB_NAME = #{jobName}
+		  , JOB_GROW_NAME = #{jobGrowName}
+	</insert>
+
+	
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="0" /><!-- 순서를 우선으로 지정 -->
+	</beans:bean>
+	 
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles-*.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- CSS, JS, IMG를 위한 디렉토리 설정 -->
+	<!-- 웹 페이지에서 URL을 통해 접근할 때 다음과 같이 절대경로 형식으로 사용한다. -->
+	<!-- ${pageContext.request.contextPath}/assets/파일경로 -->
+	<resources mapping="/js/**" location="js/" />
+	<resources mapping="/css/**" location="css/" />
+	<resources mapping="/img/**" location="img/" />
+
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/jsp/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<context:component-scan base-package="ogmaloan.com.dnf" />
+	
+	<!-- 인터셉터 등록 -->
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/**" />
+	        <beans:bean id="appInterceptor" class="ogmaloan.com.dnf.cmm.interceptor.AppInterceptor" />
+	    </interceptor>
+	</interceptors>
+	
+</beans:beans>

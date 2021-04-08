@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main">
+
+	<insert id="insertTest">
+		/* QueryId : main.insertTest */
+		INSERT INTO MENU_LOG
+			(LOG_MENU_CODE, LOG_RGT_DT)
+		VALUES
+			('000000', NOW())
+	</insert>
+	
+</mapper>
