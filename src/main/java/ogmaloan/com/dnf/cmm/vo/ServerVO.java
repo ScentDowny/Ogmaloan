@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+/* 서버 VO */
 public class ServerVO {
 
 	private String serverId;

@@ -40,7 +40,8 @@ public class ConnectUtils {
 				url += "&" + key + "=" + map.get(key);
 			}
 		}
-		
+		logger.info("apiConnect / url : [" + url + "]");
+
 		return ConnectUtils.apiConnection(url);
 	}
 	
@@ -72,7 +73,7 @@ public class ConnectUtils {
 		String json = response.toString();
 		JSONObject jsonObj = (JSONObject) parser.parse(json);
 		
-		logger.debug("[Resutl / JSON Object] :: " + jsonObj);
+		logger.debug("[Result / JSON Object] :: " + jsonObj);
 		
 		return jsonObj;
 	}
@@ -80,7 +81,7 @@ public class ConnectUtils {
 	/* UTF-8 인코딩 처리 */
 	public static String encodeURIComponent(String component) throws Exception {	 
 		
-		try {	 
+		try {
 			component = URLEncoder.encode(component, "UTF-8");
 		}
 		catch (UnsupportedEncodingException e) {

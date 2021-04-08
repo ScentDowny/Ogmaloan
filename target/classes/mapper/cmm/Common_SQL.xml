@@ -6,7 +6,7 @@
 	<!-- 서버 정보 등록 -->
 	<insert id="insertServerList" parameterType="ogmaloan.com.dnf.cmm.vo.ServerVO">
 		/* QueryId : common.insertServerList */
-		INSERT INTO SERVER_LIST
+		INSERT INTO SERVER_MASTER
 			(
 				SERVER_ID
 			  , SERVER_NAME
@@ -25,7 +25,7 @@
 		/* QueryId : common.selectServerList */
 		SELECT SERVER_ID
 			 , SERVER_NAME
-		  FROM SERVER_LIST
+		  FROM SERVER_MASTER
 	</select>
 	
 </mapper>

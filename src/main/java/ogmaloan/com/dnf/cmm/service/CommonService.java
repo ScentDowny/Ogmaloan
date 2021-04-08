@@ -11,5 +11,6 @@ public interface CommonService {
 	/* 서버 리스트 조회 */
 	public List<ServerVO> selectServerList() throws Exception;
 
-	
+	/* 직업 정보 등록 */
+	public void insertJobList() throws Exception;
 }

@@ -1,21 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language=
+				 "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div>
 	<div>
+		<div>
+			<button type="button" id="updateServerBtn" name="updateServerBtn">서버목록 업데이트</button>
+		</div>
+		<div>
+			<button type="button" id="updateJobBtn" name="updateJobBtn">직업목록 업데이트</button>
+		</div>
 		<!-- 서버 목록 시작 -->
 		<div>
-			<form name="searchForm" action="/character/main">
+			<form name="searchServerForm" action="/character/search">
 				<select id="serverId" name="serverId">
 					<c:forEach var="serverList" items="${serverList}" varStatus="index">
 						<option value="<c:out value='${serverList.serverId}'/>">${serverList.serverName}</option>
 					</c:forEach>
 				</select>
-				<input type="text" id="serverName" name="serverName">
-				<input type="submit" id="searchBtn" name="searchBtn" value="검색">
+				<input type="text" id="characterName" name="characterName">
+				<input type="submit" id="searchServerBtn" name="searchServerBtn" value="검색">
 			</form>
 		</div>
 		<!-- 서버 목록 종료 -->
 		
 	</div>
 </div>
+<script>
+	$(function() {
+		/* 서버목록 업데이트 */
+		$("#updateServerBtn").click(function () {
+			console.log("click");
+			$.ajax({
+				type : "POST",
+				url : "/cmm/updateServer",
+				success : function(data) {
+					console.log("서버목록 가져오기 성공!");
+				},
+				error : function (xhr, status, error) {
+					console.log("서버목록 가져오기 실패!");
+				}
+			});
+		});
+
+		/* 직업목록 업데이트 */
+		$("#updateJobBtn").click(function () {
+			console.log("click");
+			$.ajax({
+				type : "POST",
+				url : "/cmm/updateJob",
+				success : function(data) {
+					console.log("직업목록 가져오기 성공!");
+				},
+				error : function (xhr, status, error) {
+					console.log("직업목록 가져오기 실패!");
+				}
+			});
+		});
+	});
+</script>
