@@ -1,9 +1,12 @@
 package ogmaloan.com.dnf.cmm.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 
+import jdk.nashorn.internal.scripts.JO;
 import ogmaloan.com.dnf.cmm.vo.JobVO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +18,6 @@ import com.google.gson.reflect.TypeToken;
 import ogmaloan.com.dnf.cmm.dao.CommonDAO;
 import ogmaloan.com.dnf.cmm.utils.ConnectUtils;
 import ogmaloan.com.dnf.cmm.vo.ServerVO;
-import ogmaloan.com.dnf.main.dao.MainDAO;
 import org.springframework.util.StringUtils;
 
 @Service("CommonService")
@@ -50,7 +52,7 @@ public class CommonServiceImpl implements CommonService {
 
 				/* DataBase Insert(+ Merge into) */
 				for(int i=0; i<serverList.size(); i++) {
-					commonDAO.insertServerList(serverList.get(i));
+					commonDAO.insertServerMaster(serverList.get(i));
 				}
 			}
 
@@ -69,8 +71,7 @@ public class CommonServiceImpl implements CommonService {
 	/* 직업목록 등록 */
 	@Override
 	public void insertJobList() throws Exception {
-		List<JobVO> jobList = new ArrayList<JobVO>();
-
+		List<JobVO> list = new ArrayList<JobVO>();
 		String jobId = "";
 		String jobName = "";
 		String jobGrowId = "";
@@ -78,40 +79,74 @@ public class CommonServiceImpl implements CommonService {
 
 		try {
 			/* API URL 및 Parameter 설정 */
-			String API_URL = "/df/servers";
+			String API_URL = "/df/jobs";
 
 			/* API Connection */
 			JSONObject jsonObject = ConnectUtils.apiConnect(API_URL);
 
 			/* API Result To Json */
-			JSONArray jSONArray = (JSONArray) jsonObject.get("rows");
+			JSONArray jsonArray = (JSONArray) jsonObject.get("rows");
 
 			/* API Result is not null */
-			if(!StringUtils.isEmpty(jSONArray)) {
-
-				/* 직업전체 목록 for */
-				for(int i=0; i<jSONArray.size(); i++) {
-					JSONObject jobObject = (JSONObject) jSONArray.get(i);
+			/* 직업 */
+			if(!StringUtils.isEmpty(jsonArray)) {
+				for(int i=0; i<jsonArray.size(); i++) {
+					JSONObject jobObject = (JSONObject) jsonArray.get(i);
 					jobId = (String) jobObject.get("jobId");
 					jobName = (String) jobObject.get("jobName");
 
 					JSONArray jobGrowArray = (JSONArray) jobObject.get("rows");
-
-					/* jobId 기준 > 각성 직업 전체 목록 is not null */
+					/* 1차 */
 					if(!StringUtils.isEmpty(jobGrowArray)) {
-
-						/* jobId 기준 > 각성 직업 전체 목록 for */
-						for(int j=0; j<jobGrowArray.size(); j++) {
+						for (int j = 0; j < jobGrowArray.size(); j++) {
 							JSONObject jobGrowObject = (JSONObject) jobGrowArray.get(j);
 							jobGrowId = (String) jobGrowObject.get("jobGrowId");
 							jobGrowName = (String) jobGrowObject.get("jobGrowName");
+							this.setJobInfo(list, jobId, jobGrowId, jobName, jobGrowName, i, j, 0);
+
+							/* 2차 */
+							JSONObject nextJobGrowObject = (JSONObject) jobGrowObject.get("next");
+							if(!StringUtils.isEmpty(nextJobGrowObject)) {
+								jobGrowId = (String) nextJobGrowObject.get("jobGrowId");
+								jobGrowName = (String) nextJobGrowObject.get("jobGrowName");
+								this.setJobInfo(list, jobId, jobGrowId, jobName, jobGrowName, i, j, 1);
+
+								/* 3차 */
+								nextJobGrowObject = (JSONObject) nextJobGrowObject.get("next");
+								if(!StringUtils.isEmpty(nextJobGrowObject)) {
+									jobGrowId = (String) nextJobGrowObject.get("jobGrowId");
+									jobGrowName = (String) nextJobGrowObject.get("jobGrowName");
+									this.setJobInfo(list, jobId, jobGrowId, jobName, jobGrowName, i, j, 2);
+
+									/* 진 각성 */
+									nextJobGrowObject = (JSONObject) nextJobGrowObject.get("next");
+									if(!StringUtils.isEmpty(nextJobGrowObject)) {
+										jobGrowId = (String) nextJobGrowObject.get("jobGrowId");
+										jobGrowName = (String) nextJobGrowObject.get("jobGrowName");
+										this.setJobInfo(list, jobId, jobGrowId, jobName, jobGrowName, i, j, 3);
+									}
+								}
+							}
 						}
 					}
 				}
+			}
+
+			/* DataBase Insert(+ Merge into) */
+			for(int size=0; size<list.size(); size++) {
+				commonDAO.insertJobMaster(list.get(size));
 			}
 
 		} catch(Exception e) {
 			logger.error("insertServerList / Exception : [" + e + "]");
 		}
 	}
+
+	private List<JobVO> setJobInfo(List<JobVO> list, String jobId, String jobGrowId, String jobName, String jobGrowName, int parentJobOrder, int jobGrowOrder, int jobOrder) {
+		JobVO jobVo = new JobVO();
+		jobVo.setJobInfo(jobId, jobGrowId, jobName, jobGrowName, parentJobOrder, jobGrowOrder, jobOrder);
+		list.add(jobVo);
+		return list;
+	}
+
 }

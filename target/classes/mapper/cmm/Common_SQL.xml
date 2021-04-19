@@ -4,8 +4,8 @@
 <mapper namespace="common">
 
 	<!-- 서버 정보 등록 -->
-	<insert id="insertServerList" parameterType="ogmaloan.com.dnf.cmm.vo.ServerVO">
-		/* QueryId : common.insertServerList */
+	<insert id="insertServerMaster" parameterType="ogmaloan.com.dnf.cmm.vo.ServerVO">
+		/* QueryId : common.insertServerMaster */
 		INSERT INTO SERVER_MASTER
 			(
 				SERVER_ID
@@ -27,5 +27,35 @@
 			 , SERVER_NAME
 		  FROM SERVER_MASTER
 	</select>
+
+	<insert id="insertJobMaster" parameterType="ogmaloan.com.dnf.cmm.vo.JobVO">
+		/* QueryId : common.insertJobMaster */
+		INSERT INTO JOB_MASTER
+		(
+			  JOB_ID
+			, JOB_GROW_ID
+			, JOB_NAME
+			, JOB_GROW_NAME
+			, PARENT_JOB_ORDER
+			, JOB_GROW_ORDER
+			, JOB_ORDER
+		)
+		VALUES
+		(
+			  #{jobId}
+			, #{jobGrowId}
+			, #{jobName}
+			, #{jobGrowName}
+			, #{parentJobOrder}
+			, #{jobGrowOrder}
+			, #{jobOrder}
+		)
+		ON DUPLICATE KEY UPDATE
+			JOB_NAME = #{jobName}
+		  , JOB_GROW_NAME = #{jobGrowName}
+		  , PARENT_JOB_ORDER = #{parentJobOrder}
+		  , JOB_GROW_ORDER = #{jobGrowOrder}
+		  , JOB_ORDER = #{jobOrder}
+	</insert>
 	
 </mapper>
