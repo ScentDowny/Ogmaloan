@@ -3,12 +3,11 @@
  
 <tiles-definitions>
 
-	<!-- 메인 -->
-	<definition name="main" extends="basic_layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/main/main.jsp" />
+	<!-- 메인 페이지 -->
+	<definition name="main" extends="main_layout">
 	</definition>
 	
-	<!-- 메인 외 기타 페이지 -->
+	<!-- 기본 페이지 -->
 	<definition name="character/*" extends="basic_layout">
 		<put-attribute name="body" value="/WEB-INF/jsp/character/{1}.jsp" />
 	</definition>

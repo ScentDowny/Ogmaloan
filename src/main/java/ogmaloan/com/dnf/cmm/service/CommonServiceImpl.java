@@ -142,6 +142,7 @@ public class CommonServiceImpl implements CommonService {
 		}
 	}
 
+	/* List에 JobVO 담기 */
 	private List<JobVO> setJobInfo(List<JobVO> list, String jobId, String jobGrowId, String jobName, String jobGrowName, int parentJobOrder, int jobGrowOrder, int jobOrder) {
 		JobVO jobVo = new JobVO();
 		jobVo.setJobInfo(jobId, jobGrowId, jobName, jobGrowName, parentJobOrder, jobGrowOrder, jobOrder);

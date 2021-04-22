@@ -9,28 +9,29 @@
 <!-- meta tags -->
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
 
-<!-- jQuery tag -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- script tag -->
+<script src="/js/jquery.min.js"></script>
 
 <!-- favicon / 임시 -->
 <!-- TODO 21.03.22 ico 파일 및 이미지 교체 필요 -->
 <link rel="icon" href="/img/favicon.png" sizes="16x16">
 
 <!-- css links -->
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-<link rel="stylesheet" type="text/css" href="/css/layout.css">
-<link rel="stylesheet" type="text/css" href="/css/custom.css">
+<link rel="stylesheet" href="/css/main_layout.css"/>
 
-<!-- title setting -->
+<!-- title -->
 <title>Ogmaloan</title>
 </head>
-
 <body>
-	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="body" />
-	<tiles:insertAttribute name="footer" />
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<tiles:insertAttribute name="header" />
+		<tiles:insertAttribute name="footer" />
+	</div>
 </body>
-
+<div id="bg"></div>
 </html>

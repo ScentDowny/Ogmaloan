@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c"     uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn"    uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-<div>
-	<h1>crtMain</h1>
-</div>
 
-<div>
-	<div>
-		<!-- 서버 목록 시작 -->
-		<div>
-			<form name="searchForm" action="/character/search">
-				<select id="serverId" name="serverId">
-					<c:forEach var="serverList" items="${serverList}" varStatus="index">
-						<option value="${serverList.serverId}" <c:if test="${serverList.serverId eq serverVO.serverId}">selected</c:if>>${serverList.serverName}</option>
-					</c:forEach>
-				</select>
-				<input type="text" id="characterName" name="characterName" value="${characterVO.characterName}">
-				<input type="submit" id="searchBtn" name="searchBtn" value="검색">
-			</form>
-		</div>
-		<!-- 서버 목록 종료 -->
-		
-	</div>
+<div id="content">
+    <div class="inner">
+
+        <article class="box post post-excerpt">
+            <header>
+                <h2><a href="#">Welcome to Ogmaloan</a></h2>
+                <%--<p>A free, fully responsive HTML5 site template by HTML5 UP</p>--%>
+            </header>
+            <%--<a href="#" class="image featured"><img src="/img/bg.jpg" alt=""></a>--%>
+            <%--
+            <p>
+                <strong>Hello!</strong> You're looking at <strong>Ogmaloan</strong>
+            </p>
+            --%>
+        </article>
+
+    </div>
 </div>
