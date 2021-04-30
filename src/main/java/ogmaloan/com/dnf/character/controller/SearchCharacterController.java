@@ -3,6 +3,8 @@ package ogmaloan.com.dnf.character.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import ogmaloan.com.dnf.cmm.vo.CharacterVO;
 import org.slf4j.Logger;
@@ -40,7 +42,7 @@ public class SearchCharacterController {
 
 	/* 캐릭터 검색 */
 	@RequestMapping(value = "/character/search", method = RequestMethod.GET)
-	public String characterSearch(Model model, CharacterVO characterVO) throws Exception {
+	public String characterSearch(HttpServletRequest request, HttpServletResponse response, Model model, CharacterVO characterVO) throws Exception {
 
 		searchCharacterService.searchCharacterLists(characterVO);
 

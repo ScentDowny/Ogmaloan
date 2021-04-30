@@ -36,18 +36,16 @@ public class SearchCharacterServiceImpl implements SearchCharacterService {
 		List<CharacterVO> searchCharacters = new ArrayList<CharacterVO>();
 
 		try {
-			String serverId = characterVO.getServerId();
+			int chaNmLen = characterVO.getCharacterName().length();
+
+			if (chaNmLen < 2 || chaNmLen > 12) {
+				throw new NullPointerException();
+			}
+
+			String serverId = StringUtils.isEmpty(characterVO.getServerId()) ? "all" : characterVO.getServerId();
 			String characterName = ConnectUtils.encodeURIComponent(characterVO.getCharacterName()); //캐릭터 명칭 URL UTF-8 인코딩
 			String jobId = characterVO.getJobId();
 			String jobGrowId = characterVO.getJobGrowId();
-
-			/* 필수 값 유효성 검사 */
-			if (StringUtils.isEmpty(serverId) || StringUtils.isEmpty(characterName)) {
-				throw new NullPointerException();
-			}
-			if (characterName.length() < 2 || characterName.length() > 12) {
-				throw new NullPointerException();
-			}
 
 			/* API URL 및 Parameter 설정 */
 			String API_URL = "/df/servers/" + serverId + "/characters";

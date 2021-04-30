@@ -1,4 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<script>
+    function character_search_check() {
+        const chaNmLen = $("#characterName").val().length;
+        if (chaNmLen < 2) {
+            alert('두 글자 이상 입력해주세요.');
+            $("#characterName").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
 <!-- Sidebar -->
 <div id="sidebar">
 
@@ -10,8 +21,8 @@
     <!-- Search -->
     <section class="box search">
         <div>
-            <form method="post" action="#">
-                <input type="text" class="inputText" placeholder="Search" maxlength="6">
+            <form method="get" action="/character/search" onsubmit="return character_search_check();">
+                <input type="text" class="inputText" id="characterName" name="characterName" placeholder="Search" maxlength="6">
                 <input type="submit" class="searchBtn" value="캐릭터 검색">
             </form>
         </div>
@@ -21,21 +32,13 @@
     <nav id="nav">
         <ul>
             <li>
-                <a href="#"><span class="side_menu">캐릭터</span></a>
-                <ul>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                </ul>
+                <a href="/character/main"><span class="side_menu">캐릭터</span></a>
             </li>
             <li>
                 <a href="#"><span class="side_menu">장비</span></a>
             </li>
             <li>
                 <a href="#"><span class="side_menu">게시판</span></a>
-            </li>
-            <li>
-                <a href="#"><span class="side_menu">로그인</span></a>
             </li>
         </ul>
     </nav>

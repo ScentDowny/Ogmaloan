@@ -4,22 +4,38 @@
 <%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-
 <div id="content">
     <div class="inner">
-
-        <article class="box post post-excerpt">
-            <header>
-                <h2><a href="#">Welcome to Ogmaloan</a></h2>
-                <%--<p>A free, fully responsive HTML5 site template by HTML5 UP</p>--%>
-            </header>
-            <%--<a href="#" class="image featured"><img src="/img/bg.jpg" alt=""></a>--%>
-            <%--
-            <p>
-                <strong>Hello!</strong> You're looking at <strong>Ogmaloan</strong>
-            </p>
-            --%>
-        </article>
-
+        <div class="top">
+            <div class="search_box">
+                <select style="width: 100px; height: 30px; border: none; margin-right: 10px;">
+                    <option value="all">전체</option>
+                    <option value="all2">전체2</option>
+                </select>
+                <input type="text" style="width: 200px; height: 30px; border: none; margin-right: 10px;">
+                <input type="submit" value="검색">
+                <button type="button" class="toggleBtn">+</button>
+            </div>
+            <div class="search_detail_box">
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+                <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $(".toggleBtn").click(function(){
+            $(this).removeClass('on');
+            $(".search_detail_box").slideToggle('fast');
+            $(this).toggleClass('on');
+        });
+    });
+</script>

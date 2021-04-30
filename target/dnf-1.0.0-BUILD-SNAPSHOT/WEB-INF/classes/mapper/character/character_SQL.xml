@@ -16,6 +16,8 @@
 		  , JOB_GROW_ID
 		  , JOB_NAME
 		  , JOB_GROW_NAME
+		  , CHARACTER_REGIST_DT
+		  , CHARACTER_UPDATE_DT
 		)
 		VALUES
 		(
@@ -27,6 +29,8 @@
 		  , #{jobGrowId}
 		  , #{jobName}
 		  , #{jobGrowName}
+		  , NOW()
+		  , NOW()
 		)
 		ON DUPLICATE KEY UPDATE
 			CHARACTER_NAME = #{characterName}
@@ -36,6 +40,7 @@
 		  , JOB_GROW_ID = #{jobGrowId}
 		  , JOB_NAME = #{jobName}
 		  , JOB_GROW_NAME = #{jobGrowName}
+		  , CHARACTER_UPDATE_DT = NOW()
 	</insert>
 
 	

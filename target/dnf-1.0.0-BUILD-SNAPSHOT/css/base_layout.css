@@ -7,7 +7,7 @@ body, input, textarea, select { font-family: 'Source Sans Pro', sans-serif; font
 p, ul, ol, dl { margin-bottom: 1em; }
 ul li { padding-left: 0.5em; }
 section, article { margin-bottom: 3em; }
-input, select, textarea { -moz-appearance: none; -webkit-appearance: none; -ms-appearance: none; appearance: none; outline: none; }
+input, select, textarea { outline: none; }
 
 /* sidebar */
 #sidebar { color: #000000; width: 15em; padding: 3em 1.35em 1em 1.15em; background: #ffffff; overflow-y: auto; left: 0; -moz-order: -1; -webkit-order: -1; -ms-order: -1; order: -1; -moz-flex-grow: 0; -webkit-flex-grow: 0; -ms-flex-grow: 0; flex-grow: 0; -moz-flex-shrink: 0; -webkit-flex-shrink: 0; -ms-flex-shrink: 0; flex-shrink: 0; }
@@ -15,7 +15,7 @@ input, select, textarea { -moz-appearance: none; -webkit-appearance: none; -ms-a
 #sidebar section:before, #sidebar nav:before { content: ''; border-top: solid 2px; border-color: rgb(0 0 0); display: block; height: 0.3em; margin: 0 0 2em 0; }
 #sidebar form input, #sidebar form select, #sidebar form textarea { border: 0; }
 #sidebar form input.inputText:focus { box-shadow: inset 0px 0px 5px 1px #ffe40036; }
-#sidebar form input.searchBtn:hover { background-color: #ffe40036; }
+#sidebar form input.searchBtn:hover, .search_box > input[type=submit]:hover { background-color: #ffe40036; }
 
 /* nav */
 #nav ul { margin: 0; padding-left: 0; }
@@ -27,7 +27,7 @@ input, select, textarea { -moz-appearance: none; -webkit-appearance: none; -ms-a
 
 /* search form */
 .box.search form { position: relative; background-color: #ffffff; border-radius: 0.2em; text-align: center; box-shadow: inset 0px 0px 0px 1px rgb(255 255 255 / 15%), 0.04em 0.04em 0.15em 0em rgb(0 0 0 / 30%); text-decoration: none; color: #000; }
-.box.search form input { position: relative; line-height: 1.25em; width: 90%; display: block; padding: 0.5em 5%; }
+.box.search form input { position: relative; line-height: 1.25em; width: 90%; display: block; padding: 0.5em 5%; font-size: 1.2em; }
 
 /* section */
 section > :last-child, section > .inner > :last-child, section:last-child, article > :last-child, article > .inner > :last-child, article:last-child { margin-bottom: 0; }
@@ -57,6 +57,10 @@ header { margin: 0 0 2em 0; }
 header > p { font-family: 'Open Sans Condensed', sans-serif; font-weight: 300; display: block; margin-top: 1em; color: #999; }
 h2, h3, h4, h5, h6 { font-family: 'Open Sans Condensed', sans-serif; font-weight: 700; color: #232323; }
 strong, b { font-weight: 700; color: #232323; }
+
+#content > .inner > .top { position: absolute; left: 50%; transform: translate(-50%, 0%); }
+.search_box {}
+.search_detail_box { display: none; }
 
 /* media */
 @media screen and (min-width: 737px) {
@@ -93,7 +97,7 @@ strong, b { font-weight: 700; color: #232323; }
     html, body { overflow-x: hidden; }
     body.sidebar-visible #sidebar { -moz-transform: translateX(0); -webkit-transform: translateX(0); -ms-transform: translateX(0); transform: translateX(0); }
     body.sidebar-visible #content, body.sidebar-visible #titleBar { -moz-transform: translateX(17em); -webkit-transform: translateX(17em); -ms-transform: translateX(17em); transform: translateX(17em); }
-    #sidebar { -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden; -ms-backface-visibility: hidden; backface-visibility: hidden; -moz-transition: -moz-transform 0.5s ease; -webkit-transition: -webkit-transform 0.5s ease; -ms-transition: -ms-transform 0.5s ease; transition: transform 0.5s ease; display: block; height: 100% !important; min-height: 0 !important; overflow-y: auto; position: fixed; top: 0; z-index: -10002; -moz-transform: translateX(-18em); -webkit-transform: translateX(-18em); -ms-transform: translateX(-18em); transform: translateX(-18em); }
+    #sidebar { -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden; -ms-backface-visibility: hidden; backface-visibility: hidden; -moz-transition: -moz-transform 0.5s ease; -webkit-transition: -webkit-transform 0.5s ease; -ms-transition: -ms-transform 0.5s ease; transition: transform 0.5s ease; display: block; height: 100% !important; min-height: 0 !important; overflow-y: auto; position: fixed; top: 0; z-index: 10002; -moz-transform: translateX(-18em); -webkit-transform: translateX(-18em); -ms-transform: translateX(-18em); transform: translateX(-18em); }
     #content { -moz-backface-visibility: hidden; -webkit-backface-visibility: hidden; -ms-backface-visibility: hidden; backface-visibility: hidden; -moz-transition: -moz-transform 0.5s ease; -webkit-transition: -webkit-transform 0.5s ease; -ms-transition: -ms-transform 0.5s ease; transition: transform 0.5s ease; margin-top: 44px; margin-left: 0; margin-right: 0; min-height: 0 !important; }
     #titleBar { display: block; }
 }

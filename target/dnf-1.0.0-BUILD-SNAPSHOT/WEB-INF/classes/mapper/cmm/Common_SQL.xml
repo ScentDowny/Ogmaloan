@@ -10,14 +10,19 @@
 			(
 				SERVER_ID
 			  , SERVER_NAME
+			  , SERVER_REGIST_DT
+			  , SERVER_UPDATE_DT
 			)
 		VALUES
 			(
 				#{serverId}
 			  , #{serverName}
+			  , NOW()
+			  , NOW()
 			)
 		ON DUPLICATE KEY UPDATE
 			SERVER_NAME = #{serverName}
+		  , SERVER_UPDATE_DT = NOW()
 	</insert>
 	
 	<!-- 서버 리스트 조회 -->
@@ -28,6 +33,7 @@
 		  FROM SERVER_MASTER
 	</select>
 
+	<!-- 직업 정보 등록 -->
 	<insert id="insertJobMaster" parameterType="ogmaloan.com.dnf.cmm.vo.JobVO">
 		/* QueryId : common.insertJobMaster */
 		INSERT INTO JOB_MASTER
@@ -39,6 +45,8 @@
 			, PARENT_JOB_ORDER
 			, JOB_GROW_ORDER
 			, JOB_ORDER
+			, JOB_REGIST_DT
+			, JOB_UPDATE_DT
 		)
 		VALUES
 		(
@@ -49,6 +57,8 @@
 			, #{parentJobOrder}
 			, #{jobGrowOrder}
 			, #{jobOrder}
+			, NOW()
+			, NOW()
 		)
 		ON DUPLICATE KEY UPDATE
 			JOB_NAME = #{jobName}
@@ -56,6 +66,47 @@
 		  , PARENT_JOB_ORDER = #{parentJobOrder}
 		  , JOB_GROW_ORDER = #{jobGrowOrder}
 		  , JOB_ORDER = #{jobOrder}
+		  , JOB_UPDATE_DT = NOW()
 	</insert>
+
+	<!-- 직업 리스트 건수 조회 -->
+	<select id="selectJobListCount" resultType="java.lang.Integer">
+		/* QueryId : common.selectJobListCount */
+		SELECT COUNT(1)
+		  FROM JOB_MASTER
+		 WHERE JOB_GROW_ORDER = 0
+		   AND JOB_ORDER = 0
+	</select>
+
+	<!-- 직업 리스트 조회 -->
+	<select id="selectJobList" resultType="ogmaloan.com.dnf.cmm.vo.JobVO">
+		/* QueryId : common.selectJobList */
+		SELECT JOB_ID
+			 , JOB_NAME
+		  FROM JOB_MASTER
+		 WHERE JOB_GROW_ORDER = 0
+		   AND JOB_ORDER = 0
+	</select>
+
+	<!-- 각성 직업 리스트 건수 조회 -->
+	<select id="selectJobGrowListCount" parameterType="ogmaloan.com.dnf.cmm.vo.JobVO" resultType="java.lang.Integer">
+		/* QueryId : common.selectJobGrowListCount */
+		SELECT COUNT(1)
+		  FROM JOB_MASTER
+		 WHERE JOB_ID = #{jobId}
+		   AND JOB_ORDER = #{jobOrder}
+		 ORDER BY JOB_GROW_ORDER
+	</select>
+
+	<!-- 각성 직업 리스트 조회 -->
+	<select id="selectJobGrowList" parameterType="ogmaloan.com.dnf.cmm.vo.JobVO" resultType="ogmaloan.com.dnf.cmm.vo.JobVO">
+		/* QueryId : common.selectJobList */
+		SELECT JOB_GROW_ID
+			 , JOB_GROW_NAME
+		  FROM JOB_MASTER
+		 WHERE JOB_ID = #{jobId}
+		   AND JOB_ORDER = #{jobOrder}
+		 ORDER BY JOB_GROW_ORDER
+	</select>
 	
 </mapper>

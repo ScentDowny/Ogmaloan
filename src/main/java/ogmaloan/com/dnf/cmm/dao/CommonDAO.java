@@ -25,4 +25,24 @@ public class CommonDAO extends AbstractDAO {
 		insert("common.insertJobMaster", JobVo);
 	}
 
+	/* 직업 리스트 건수 조회 */
+	public int selectJobListCount() {
+		return (int) selectOne("common.selectJobListCount");
+	}
+
+	/* 직업 리스트 조회 */
+	public List<JobVO> selectJobList() {
+		return (List<JobVO>) selectList("common.selectJobList");
+	}
+
+	/* 각성 직업 리스트 건수 조회 */
+	public int selectJobGrowListCount(JobVO jobVo) {
+		return (int) selectOne("common.selectJobGrowListCount", jobVo);
+	}
+
+	/* 각성 직업 리스트 조회 */
+	public List<JobVO> selectJobGrowList(JobVO jobVo) {
+		return (List<JobVO>) selectList("common.selectJobGrowList");
+	}
+
 }
