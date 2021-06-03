@@ -9,9 +9,4 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/tiles_views/main_footer.jsp" />
 	</definition>
 
-	<!-- 기본 레이아웃 -->
-	<definition name="basic_layout" template="/WEB-INF/tiles/tiles_layout/base_layout.jsp">
-		<put-attribute name="sidebar" value="/WEB-INF/tiles/tiles_views/base_sidebar.jsp" />
-	</definition>
-
 </tiles-definitions>

@@ -12,7 +12,7 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/character/main" title="바로기가기">캐릭터</a></li>
+            <li><a href="#Character" title="바로기가기">캐릭터</a></li>
             <li><a href="#Equipment" title="바로기가기">장비</a></li>
             <li><a href="#Community" title="바로기가기">게시판</a></li>
             <li><a href="#Signin" title="바로기가기">로그인</a></li>

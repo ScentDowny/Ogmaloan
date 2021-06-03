@@ -5,17 +5,9 @@
 
 	<!-- 메인 페이지 -->
 	<definition name="main" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/main/main.jsp" />
 	</definition>
-	
-	<!-- 기본 페이지 -->
-	<definition name="character/*" extends="basic_layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/character/{1}.jsp" />
-	</definition>
-	
-	<definition name="character/*/*" extends="basic_layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/character/{1}/{2}.jsp" />
-	</definition>
-	
+
 	
 	
 </tiles-definitions>
